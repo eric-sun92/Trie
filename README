@@ -1,0 +1,58 @@
+my implementation of the trie data structure
+
+this is sorta like the language/grammar tree that i learned in 201
+basically used to see if words are in the array
+can store words in an array recursively
+each letter is its own node
+then the nodes are recursively accessed as you go down the tree each letter being the next consecutive letter
+each letter has a property of being the end of a word as well as the letter itself as well as the next node if not end of word
+
+note-can be end of word as well as have a node to next letter to another word
+
+functions include add, isWord, print
+
+add: (adds a word into the trie)
+-(recursive function)
+-takes a word and a node
+-if no node parameter, then set to root node
+-checks to see if length of word is === 1,
+-if not , then checks to see if the key.has(word[0]) basically checks to see if the
+first letter in str alr exists within the keys of the node
+-if so then just recursively call on the substr(1) of word as well as the
+node that contains the letter using key.get(word[0])
+-if not then make a new node and set the keys.set(word[0], with the new node)
+then recursively call the function with new word and the node with the letter in it
+
+        -if so then u are at the last letter in the word
+            -set the property in node called lastLetter to true
+            -i did it with a function in the node class (-note)
+            return
+
+isWord: (checks to see if the word exists within the trie)
+-check to see if word length greater than 1
+-if so then u have to take the first letter word[0]
+and find the corresponding node with keys.get(word[0])
+-if there is no corresponding not then (using .has()) then u instantly return false
+-f there is, then splice the word with word.substr(1) and change the node to the new corresponding node
+-keep going with a while loop until the word length is 1
+-once ur at this stage, ur left with the last letter as well as the corresponding node
+check to see if the corresponding node's this.lastLetter is true as well as if
+the last letter is within a node in the keys
+if both are true then return true if not then false
+
+print: (print all the words in the trie)
+-define a new Array()
+-define a function search(node, string)
+-this recursively calls thru all the letters in all the nodes in the trie
+-do a forEach loop through each letter in the root node
+-for each letter call the function search but get the node with the corresponding
+letter as well as the string concatted with the letter
+-check to see if there are no more nodes, using keys.size != 0
+-if no more nodes then check string length, if more than 0, then push string to
+new Array and return : if len 0 then just return undefined
+-check to see if the node is the lastLetter, if it is then push the string and keep going
+
+        -once u go through each letter in each node, ur done
+    -call the function search(with the root node and new String())
+
+
